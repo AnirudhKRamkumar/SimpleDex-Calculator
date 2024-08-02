@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damage Calculation Result</title>
+    <style>
+        @font-face {
+            font-family: 'Pokémon DP Pro';
+            src: url('../fonts/pokemon-dp-pro.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            font-size: 150%;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            margin: 10px 0;
+            color: #666;
+        }
+        .result {
+            font-weight: bold;
+        }
+        .health-bar {
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden; /* Ensures the health progress doesn't overflow */
+            position: relative; /* Position relative for absolute positioning */
+        }
+        .health-progress, .health-damage, .max-hp, .damage-range {
+            height: 100%;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .health-progress {
+            background-color: #4caf50; /* Green */
+            width: {{ (damage_info["Min HP Remaining"] / damage_info["Target Max HP"]) * 100 }}%; /* Sets width based on current HP */
+        }
+        .health-damage {
+            background-color: #f44336; /* Red */
+            width: {{ ((damage_info["Max HP Remaining"] - damage_info["Min HP Remaining"]) / damage_info["Target Max HP"]) * 100 }}%; /* Sets width based on damage taken */
+        }
+        .max-hp {
+            background-color: #4caf50; /* Green */
+            width: {{ (damage_info["Max HP Remaining"] / damage_info["Target Max HP"]) * 100 }}%; /* Sets width based on max HP */
+        }
+        .damage-range {
+            background-color: #f44336; /* Red */
+            width: {{ ((damage_info["Max HP Remaining"] - damage_info["Min HP Remaining"]) / damage_info["Target Max HP"]) * 100 }}%; /* Sets width based on potential damage range */
+            left: {{ (damage_info["Min HP Remaining"] / damage_info["Target Max HP"]) * 100 }}%; /* Sets left position based on current HP */
+        }
+        .result.green {
+            color: green;
+        }
+        .result.red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Damage Calculation Result</h1>  
+        <p>Max HP Remaining: <span class="result">{{ damage_info["Max HP Remaining"] }} / {{ damage_info["Target Max HP"] }}</span></p>
+        <p>Min HP Remaining: <span class="result">{{ damage_info["Min HP Remaining"] }} / {{ damage_info["Target Max HP"] }}</span></p>
+        <p>Super Effective: <span class="result {{ "green" if damage_info["Super Effective"] else "red" }}">{{ "Yes" if damage_info["Super Effective"] else "No" }}</span></p>
+        <p>Not Very Effective: <span class="result {{ "green" if damage_info["Not Very Effective"] else "red" }}">{{ "Yes" if damage_info["Not Very Effective"] else "No" }}</span></p>
+        <p>Immune: <span class="result {{ "green" if damage_info["Immune"] else "red" }}">{{ "Yes" if damage_info["Immune"] else "No" }}</span></p>
+        <div class="health-bar">
+            <div class="health-damage"></div> <!-- Represents damage taken -->
+            <div class="damage-range"></div> <!-- Represents potential damage range -->
+            <div class="health-progress"></div> <!-- Represents current health progress -->
+            <div class="max-hp"></div> <!-- Represents max HP remaining -->
+        </div>
+    </div>
+</body>
+</html>

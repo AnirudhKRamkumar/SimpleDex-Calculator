@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Damage Calculator</title>
+    <style>
+        @font-face {
+            font-family: 'Pokémon DP Pro';
+            src: url('../fonts/pokemon-dp-pro.ttf') format('truetype');
+        }
+        body {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif;
+            font-size: 150%;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"] {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif;
+            font-size: 24px;
+            width: calc(50% - 5px); /* Adjusted width for inputs */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        select#move {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif;
+            font-size: 24px;
+            width: calc(50% - 5px); /* Adjusted width for inputs */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            display: inline-block; /* Displaying move dropdown inline */
+            width: calc(50% - 5px); /* Adjusted width for move dropdown */
+        }
+        button[type="submit"] {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+        <h1>Pokémon Damage Calculator</h1>
+        <form id='pokeForm' method="POST">
+            <label for="user">Which Pokémon is attacking?</label>
+            <input type="text" id="user" name="user" placeholder="User">
+            <label for="move">Select Move</label> <!-- Added label for move dropdown -->
+            <select id="move"></select>
+            <label for="target">Which Pokémon is taking the attack?</label>
+            <input type="text" id="target" name="target" placeholder="Target">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add event listener to the user input field to trigger move population
+            document.getElementById("user").addEventListener("blur", function() {
+                var userInput = document.getElementById("user").value.trim().toLowerCase();
+                if (userInput !== '') {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/update_movelist", true);
+                    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            var moveList = JSON.parse(xhr.responseText);
+                            populateMoves(moveList);
+                        }
+                    };
+                    xhr.send(JSON.stringify({ "userInput": userInput }));
+                } else {
+                    document.getElementById("move").style.display = "none";
+                }
+            });
+        });
+
+        // Function to populate the move dropdown based on the selected Pokémon
+        function populateMoves(moveList) {
+            var moveDropdown = document.getElementById("move");
+            moveDropdown.innerHTML = ""; // Clear previous options
+            moveDropdown.style.display = "block"; // Show the dropdown
+
+            if (moveList) {
+                moveList.forEach(function(move) {
+                    var option = document.createElement("option");
+                    option.text = move;
+                    moveDropdown.add(option);
+                });
+            }
+            
+            document.getElementById("pokeForm").submit();
+        }            
+    </script>
+</body>
+</html>

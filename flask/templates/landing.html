@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('serve_image', filename='favicon.ico') }}">
+    <title>Landing Page</title>
+    <style>
+        @font-face {
+            font-family: 'Pokémon DP Pro';
+            src: url('../fonts/pokemon-dp-pro.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            font-size: 150%;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        button {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            width: 150px;
+            font-size: 24px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+      <h1>Online Pokédex/Damage Calculator</h1>
+      <button onclick="redirectToPage1()">Calculator</button>
+      <button onclick="redirectToPage2()">Pokédex</button>
+   </div>
+
+   <script>
+      function redirectToPage1() {
+          window.location.href = "/calculator";
+      }
+
+      function redirectToPage2() {
+          window.location.href = "/pokedex";
+      }
+   </script>
+</body>
+</html>

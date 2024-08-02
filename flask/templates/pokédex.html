@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <style>
+        @font-face {
+            font-family: 'Pokémon DP Pro';
+            src: url('../fonts/pokemon-dp-pro.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            font-size: 150%;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        input[type="text"] {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 24px;
+        }
+        input[type="text"]:focus {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            outline: none;
+            border-color: #007bff;
+        }
+        input[type="submit"] {
+            font-family: 'Pokémon DP Pro', Arial, sans-serif; /* Change font to PokemonDPPro */
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Pokédex</h1>
+    <form method="POST">
+       <label for="mon">Type in a Pokémon's name here:</label>
+       <input type="text" id="mon" name="mon" placeholder="Pokémon">
+       <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
