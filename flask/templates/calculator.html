@@ -91,7 +91,7 @@
             
             <!-- Move selection dropdown -->
             <label for="move">Select Move</label>
-            <select id="move"></select>
+            <select id="move" name="move"></select>
             
             <!-- Target input field for defending Pokémon -->
             <label for="target">Which Pokémon is taking the attack?</label>
@@ -114,6 +114,9 @@
                         if (xhr.readyState == 4 && xhr.status == 200) {
                             var moveList = JSON.parse(xhr.responseText);
                             populateMoves(moveList);
+                        } else if (xhr.readyState == 4) {
+                            // Handle error
+                            console.error('Error fetching move list');
                         }
                     };
                     xhr.send(JSON.stringify({ "userInput": userInput }));
@@ -129,15 +132,19 @@
             moveDropdown.innerHTML = ""; // Clear previous options
             moveDropdown.style.display = "block"; // Show the dropdown
 
-            if (moveList) {
+            if (moveList && moveList.length > 0) {
                 moveList.forEach(function(move) {
-                    var option = document.createElement("option");
-                    option.text = move;
-                    moveDropdown.add(option);
+                    if (typeof move === 'string' && move.trim() !== '') { // Ensure move is a non-empty string
+                        var option = document.createElement("option");
+                        option.text = move;
+                        moveDropdown.add(option);
+                    } else {
+                        console.warn('Invalid move:', move);
+                    }
                 });
+            } else {
+                console.error('Move list is empty or invalid');
             }
-            
-            document.getElementById("pokeForm").submit();
         }
     </script>
 </body>

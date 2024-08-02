@@ -24,6 +24,7 @@ def calculator():
     if request.method == "POST":
         # Retrieve form inputs
         selected_move = request.form.get("move")
+        print(selected_move)
         selected_user = request.form.get("user")
         selected_target = request.form.get("target")
         try:

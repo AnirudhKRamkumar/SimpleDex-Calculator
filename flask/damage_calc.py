@@ -21,18 +21,17 @@ def moveListGenerator(selected_user):
         for j in pokemon_cache:
             if j["Name"] == selected_user.title():
                 cached = True
-                for mov in j["Moves"]["TM Learnset"]:
-                    if mov in movelist:
-                        continue
-                    movelist.append(mov["Move"])
-                for mov in j["Moves"]["Level Up Learnset"]:
-                    if mov in movelist:
-                        continue
-                    movelist.append(mov["Move"])
+                for move1 in j["Moves"]["TM Learnset"]:
+                    if move1["Move"] not in movelist:
+                        movelist.append(move1["Move"])
+                for move2 in j["Moves"]["Level Up Learnset"]:
+                    if move2["Move"] not in movelist:
+                        movelist.append(move2["Move"])
         if cached == False:
             user = pb.pokemon(selected_user)
             for mov in user.moves:
-                movelist.append((mov.move.name).replace('-', ' ').title())   
+                movelist.append((mov.move.name).replace('-', ' ').title()) 
+        print(type(movelist))  
         return movelist
     except AttributeError:
         return None
