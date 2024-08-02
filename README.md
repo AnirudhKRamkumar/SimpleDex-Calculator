@@ -6,11 +6,12 @@ A simple web application that displays a given Pokémon's information like a Pok
 
 ## Project Status
 Calculator:
-- Currently unusable due to issues with loading all possible moves the user can learn.
+- Slow but works as intended.
 
 Online Pokedex: 
 - Mostly works as intended, with the Pokémon's basic information, sprite, abilities, stats, and learnset properly displayed; TM numbers are yet to be implemented.
 
 ## Next Steps
-- Fix the calculator issue where the user's moves do not load properly.
 - Integrate TM numbers into the TM Learnset table.
+- Finish caching all 1025 Pokémon which will cut load times down by minutes
+- Beautify the calculator.
