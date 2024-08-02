@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Damage Calculator</title>
     <style>
+        /* Custom font for the Pokémon theme */
         @font-face {
             font-family: 'Pokémon DP Pro';
             src: url('../fonts/pokemon-dp-pro.ttf') format('truetype');
         }
+        /* Basic styling for the body */
         body {
             font-family: 'Pokémon DP Pro', Arial, sans-serif;
             font-size: 150%;
@@ -17,6 +19,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+        /* Container for the form */
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -25,15 +28,18 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        /* Styling for the heading */
         h1 {
             color: #333;
             text-align: center;
         }
+        /* Styling for the labels */
         label {
             display: block;
             margin-bottom: 5px;
             color: #333;
         }
+        /* Styling for the input fields */
         input[type="text"] {
             font-family: 'Pokémon DP Pro', Arial, sans-serif;
             font-size: 24px;
@@ -44,6 +50,7 @@
             box-sizing: border-box;
             margin-bottom: 10px;
         }
+        /* Styling for the move dropdown */
         select#move {
             font-family: 'Pokémon DP Pro', Arial, sans-serif;
             font-size: 24px;
@@ -56,6 +63,7 @@
             display: inline-block; /* Displaying move dropdown inline */
             width: calc(50% - 5px); /* Adjusted width for move dropdown */
         }
+        /* Styling for the submit button */
         button[type="submit"] {
             font-family: 'Pokémon DP Pro', Arial, sans-serif;
             font-size: 24px;
@@ -67,21 +75,29 @@
             cursor: pointer;
             width: 100%;
         }
+        /* Hover effect for the submit button */
         button[type="submit"]:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
-   <div class="container">
+    <div class="container">
         <h1>Pokémon Damage Calculator</h1>
         <form id='pokeForm' method="POST">
+            <!-- User input field for attacking Pokémon -->
             <label for="user">Which Pokémon is attacking?</label>
             <input type="text" id="user" name="user" placeholder="User">
-            <label for="move">Select Move</label> <!-- Added label for move dropdown -->
+            
+            <!-- Move selection dropdown -->
+            <label for="move">Select Move</label>
             <select id="move"></select>
+            
+            <!-- Target input field for defending Pokémon -->
             <label for="target">Which Pokémon is taking the attack?</label>
             <input type="text" id="target" name="target" placeholder="Target">
+            
+            <!-- Submit button for the form -->
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -122,7 +138,7 @@
             }
             
             document.getElementById("pokeForm").submit();
-        }            
+        }
     </script>
 </body>
 </html>
